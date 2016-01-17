@@ -18,6 +18,12 @@ gulp.task('lint', function() {
 			.pipe(jshint.reporter('default'));
 });
 
+
+gulp.task('clean', function (done) {
+    $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')], done);
+});
+
+
 // Compile Our Sass
 gulp.task('sass', function() {
 	return gulp.src('scss/*.scss')
