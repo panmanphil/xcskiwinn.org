@@ -174,11 +174,11 @@ input.form-radio {
  * @see collapse.js
  */
 html.js fieldset.collapsible .fieldset-legend {
-  background: url(../../misc/menu-expanded.png) 5px 65% no-repeat; /* LTR */
+  background: url(/images/menu-expanded.png) 5px 65% no-repeat; /* LTR */
   padding-left: 15px; /* LTR */
 }
 html.js fieldset.collapsed .fieldset-legend {
-  background-image: url(../../misc/menu-collapsed.png); /* LTR */
+  background-image: url(/images/menu-collapsed.png); /* LTR */
   background-position: 5px 50%; /* LTR */
 }
 .fieldset-legend span.summary {

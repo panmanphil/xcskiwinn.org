@@ -31,40 +31,22 @@ gulp.task('sass', function() {
 			.pipe(gulp.dest('css'));
 });
 
-gulp.task('partials', function () {
-	return gulp.src([
-				path.join(conf.paths.src, '/app/**/*.html'),
-				path.join(conf.paths.tmp, '/serve/app/**/*.html')
-			])
-			.pipe($.minifyHtml({
-				empty: true,
-				spare: true,
-				quotes: true
-			}))
 
-			.pipe(gulp.dest(conf.paths.tmp + '/partials/'));
-});
 gulp.task('images', function () {
     var images = gulp.src(path.join(conf.paths.src, '/app/images/**'));
     images.pipe(gulp.dest(path.join(conf.paths.tmp + '/serve/images')));
 
 });
 
-gulp.task('html', ['inject', 'partials'], function () {
-	var partialsInjectFile = gulp.src(path.join(conf.paths.tmp, '/partials/templateCacheHtml.js'), {read: false});
-	var partialsInjectOptions = {
-		starttag: '<!-- inject:partials -->',
-		ignorePath: path.join(conf.paths.tmp, '/partials'),
-		addRootSlash: false
-	};
+gulp.task('html', ['inject'], function () {
 
-	var htmlFilter = $.filter('*.html');
+
+	var htmlFilter = $.filter('**/*.html');
 	var jsFilter = $.filter('**/*.js');
 	var cssFilter = $.filter('**/*.css');
 	var assets;
 
 	return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
-			.pipe($.inject(partialsInjectFile, partialsInjectOptions))
 			.pipe(assets = $.useref.assets())
 			.pipe($.rev())
 

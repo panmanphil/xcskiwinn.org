@@ -1437,7 +1437,7 @@ body.page-home-variant-5 #block-views-seven-slideshow-4-block .views-slideshow-c
 }
 
 #block-views-seven-slideshow-6-block .views-slideshow-cycle-main-frame-row-item .views-field-nothing {
-    background: url("../images/variant 6/slide1-background.png") repeat scroll 0 0 transparent;    
+    background: url("../images/variant6/slide1-background.png") repeat scroll 0 0 transparent;
     margin-top: 50px;
     position: absolute;
     text-align: left;
@@ -1534,7 +1534,7 @@ body.page-home-variant-5 #block-views-seven-slideshow-4-block .views-slideshow-c
 }
 
 #block-views-seven-slideshow-6-block .views-slideshow-controls-bottom .views-field-nothing {
-    background: url("../images/variant 6/slide-control.png") no-repeat scroll 2px -20px transparent;
+    background: url("../images/variant6/slide-control.png") no-repeat scroll 2px -20px transparent;
     height: 16px;
     margin-right: 5px;
     padding: 0;
@@ -1543,7 +1543,7 @@ body.page-home-variant-5 #block-views-seven-slideshow-4-block .views-slideshow-c
 }
 
 #block-views-seven-slideshow-6-block .views-slideshow-controls-bottom .active .views-field-nothing, #block-views-seven-slideshow-6-block .views-slideshow-controls-bottom .views-field-nothing:hover {
-    background: url("../images/variant 6/slide-control.png") no-repeat scroll 2px 1px transparent;    
+    background: url("../images/variant6/slide-control.png") no-repeat scroll 2px 1px transparent;
 }
 
 #block-views-seven-slideshow-6-block .views-field-nothing a {
@@ -1582,19 +1582,19 @@ body.page-home-variant-6 #content, body.page-home-variant-6 .region-sidebar-firs
 }
 
 body.page-home-variant-6{
-    background: url("../images/variant 6/body-background.jpg") repeat-x scroll 0 114px   transparent;
+    background: url("../images/variant6/body-background.jpg") repeat-x scroll 0 114px   transparent;
 }
 
 body.page-home-variant-6.toolbar {
-	background: url("../images/variant 6/body-background.jpg") repeat-x scroll 0 179px transparent;
+	background: url("../images/variant6/body-background.jpg") repeat-x scroll 0 179px transparent;
 }
 
 body.page-home-variant-6 .second-body{
-    background: url("../images/variant 6/slide-background.jpg") no-repeat scroll center 135px transparent;
+    background: url("../images/variant6/slide-background.jpg") no-repeat scroll center 135px transparent;
 }
 
 body.page-home-variant-6.toolbar .second-body {
-	background: url("../images/variant 6/slide-background.jpg") no-repeat scroll center 135px transparent;
+	background: url("../images/variant6/slide-background.jpg") no-repeat scroll center 135px transparent;
 }
 
 body.page-home-variant-6 #block-views-seven-slideshow-4-block .views-slideshow-controls-bottom .views-slideshow-pager-field-item {    

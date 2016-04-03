@@ -14,44 +14,30 @@ var wiredep = require('wiredep').stream;
 var _ = require('lodash');
 
 gulp.task('styles', function () {
-	var sassOptions = {
-		style: 'expanded'
-	};
 
-	var copyFiles = gulp.src([
-			path.join(conf.paths.src, '/app/css/*.css')
-	]);
+	gulp.src([path.join(conf.paths.src, '/app/css/*.css')])
+		.pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/css')));
 
-	copyFiles
-			.pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/css')));
-
+    var ignore = '!' +
+        path.join(conf.paths.src, '/app/css/responsive*.css');
 	var injectFiles = gulp.src([
-		path.join(conf.paths.src, '/app/css/*.css')
-
-
-	], {read: false})
+		path.join(conf.paths.src, '/app/css/*.css'),
+        ignore
+    ], {read: false});
 	var options = {
-		transform: function (filepath) {
+		transform: function (filepath, dest) {
 			filepath = filepath.replace('' + conf.paths.src + '/app/', '');
 			filepath = filepath.replace(/^\//, '');
 
-			return '@import "' + filepath + '";';
-		}
-	}
-	var injectOptions = {
-		transform: function (filePath) {
-			filePath = filePath.replace(conf.paths.src + '/app/', '');
-			return '@import "' + filePath + '";';
+			return '@import url("/' + filepath + '");';
 		},
-		starttag: '<!-- inject:css -->',
-		endtag: '<!-- endinjector -->',
-		addRootSlash: false
+        starttag: '/*inject:css*/',
+        endtag: '/*endinject*/'
 	};
 
 
-
 	var target = gulp.src([
-		path.join(conf.paths.src, '/app/index.html')
+		path.join(conf.paths.src, '/app/**/index.html')
 	]);
 
 	return target.pipe(inject(injectFiles, options))
