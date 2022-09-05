@@ -1,61 +1,66 @@
 var jshint = require('gulp-jshint');
-var sass = require('gulp-sass');
+var gulpSass = require('gulp-sass')
+var sassSass = require('sass')
 var path = require('path');
 var conf = require('./conf');
 var uglify = require('gulp-uglify');
+var del = require('del');
+var { inject } = require('./inject');
+
+var sass = gulpSass(sassSass);
 
 var $ = require('gulp-load-plugins')({
-    pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
+    pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license']
 });
 
 'use strict';
-
 var gulp = require('gulp');
+var { series } = require('gulp');
 // Lint Task
-gulp.task('lint', function() {
+function lint() {
 	return gulp.src('js/*.js')
 			.pipe(jshint())
 			.pipe(jshint.reporter('default'));
-});
+};
 
 
-gulp.task('clean', function (done) {
-    $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')], done);
-});
+exports.clean = function clean(done) {
+    del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')]);
+	done();
+};
 
 
 // Compile Our Sass
-gulp.task('sass', function() {
+function sass() {
 	return gulp.src('scss/*.scss')
-			.pipe(sass())
+			.pipe(sass().sync().on('error', sass.logError))
 			.pipe(gulp.dest('css'));
-});
+};
 
 
-gulp.task('images', function () {
+function images() {
     var images = gulp.src(path.join(conf.paths.src, '/app/images/**'));
-    images.pipe(gulp.dest(path.join(conf.paths.tmp + '/serve/images')));
+    return images.pipe(gulp.dest(path.join(conf.paths.tmp + '/serve/images')));
+	
+};
 
-});
-
-gulp.task('html', ['inject'], function () {
+function html() {
 
 
-	var htmlFilter = $.filter('**/*.html');
-	var jsFilter = $.filter('**/*.js');
-	var cssFilter = $.filter('**/*.css');
-	var assets;
+	var htmlFilter = $.filter('**/*.html', {restore: true});
+	var jsFilter = $.filter('**/*.js', {restore: true});
+	var cssFilter = $.filter('**/*.css', {restore: true});
 
 	return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
-			.pipe(assets = $.useref.assets())
+			.pipe($.useref())
 			.pipe($.rev())
 
 			.pipe(jsFilter)
 			.pipe($.uglify({preserveComments: $.uglifySaveLicense})).on('error', conf.errorHandler('Uglify'))
-			.pipe(jsFilter.restore())
+			.pipe(jsFilter.restore)
 			.pipe(cssFilter)
 			.pipe($.csso(true))
-			.pipe(cssFilter.restore())
+			.pipe(cssFilter.restore)
 			.pipe(htmlFilter)
 			.pipe($.minifyHtml({
 				empty: true,
@@ -63,10 +68,12 @@ gulp.task('html', ['inject'], function () {
 				quotes: true,
 				conditionals: true
 			}))
-			.pipe(htmlFilter.restore())
+			.pipe(htmlFilter.restore)
 			.pipe(gulp.dest(path.join(conf.paths.dist, '/')))
 			.pipe($.size({title: path.join(conf.paths.dist, '/'), showFiles: true}));
-});
+};
 
-gulp.task('build', ['html', 'sass', 'scripts', 'images']);
+exports.build = series(inject, html, images);
+exports.default = series(inject, html, images);
+
 
