@@ -10,7 +10,7 @@ function isOnlyChange(event) {
 	return event.type === 'changed';
 }
 
-gulp.task('watch', ['inject'], function () {
+exports.watch = function () {
 
 	gulp.watch([path.join(conf.paths.src, '/*.html'), 'bower.json'], ['inject']);
 
@@ -36,4 +36,4 @@ gulp.task('watch', ['inject'], function () {
 	gulp.watch(path.join(conf.paths.src, '/app/**/*.html'), function (event) {
 		browserSync.reload(event.path);
 	});
-});
+};

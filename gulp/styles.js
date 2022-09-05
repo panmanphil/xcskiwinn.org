@@ -13,7 +13,7 @@ var $ = require('gulp-load-plugins')();
 var wiredep = require('wiredep').stream;
 var _ = require('lodash');
 
-gulp.task('styles', function () {
+exports.styles = function styles() {
 
 	gulp.src([path.join(conf.paths.src, '/app/css/*.css')])
 		.pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/css')));
@@ -52,4 +52,4 @@ gulp.task('styles', function () {
 		.pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app/')))
 		.pipe(browserSync.reload({stream: true}));
 		*/
-});
+};
