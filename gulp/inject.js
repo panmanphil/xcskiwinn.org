@@ -9,7 +9,7 @@ var $ = require('gulp-load-plugins')();
 var wiredep = require('wiredep').stream;
 var _ = require('lodash');
 
-gulp.task('inject', ['scripts', 'styles'], function () {
+exports.inject = function inject() {
 	var injectStyles = gulp.src([
 	path.join(conf.paths.tmp, '/serve/app/**/*.css'),
 	path.join('!' + conf.paths.tmp, '/serve/app/vendor.css')
@@ -32,4 +32,4 @@ gulp.task('inject', ['scripts', 'styles'], function () {
 	.pipe($.inject(injectScripts, injectOptions))
 	.pipe(wiredep(_.extend({}, conf.wiredep)))
 	.pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));
-});
+};

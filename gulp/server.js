@@ -5,7 +5,6 @@ var gulp = require('gulp');
 var conf = require('./conf');
 
 var browserSync = require('browser-sync');
-var browserSyncSpa = require('browser-sync-spa');
 
 var util = require('util');
 
@@ -32,10 +31,10 @@ function browserSyncInit(baseDir, browser) {
 	});
 }
 
-gulp.task('serve', ['images', 'html', 'styles','watch'], function () {
+exports.serve = function serve() {
 	browserSyncInit([path.join(conf.paths.tmp, '/serve'), conf.paths.src]);
-});
+};
 
-gulp.task('serve:dist', ['build'], function () {
+exports.serveDist = function( serveDist) {
 	browserSyncInit(conf.paths.dist);
-});
+};
