@@ -8,7 +8,7 @@ This site changes rarely so there are no pressing needs. I am interested in comp
 
 After updating to gulp 4, the flow for updating the site is
 edit site
-`rm ./tmp (clean task is only partly working)`
+`rm -r ./tmp (clean task is only partly working)`
 `npx gulp default`
 `npx gulp serveDist`
 repeat as needed
